@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NYCSchools</string>
+    <string name="fetching_schoolinformation">Fetching SchoolInformation</string>
+    <string name="fetching_data">Fetching Data</string>
+    <string name="contact_information">Contact Information</string>
+    <string name="extracurricular_activities">Extracurricular Activities</string>
+    <string name="sat_scores">SAT Scores</string>
+    <string name="math_score">"Math Score: "</string>
+    <string name="reading_score">"Reading Score: "</string>
+    <string name="writingscore">WritingScore</string>
+    <string name="schools">Schools</string>
+</resources>

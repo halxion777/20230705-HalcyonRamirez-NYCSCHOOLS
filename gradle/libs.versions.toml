@@ -1,0 +1,72 @@
+[versions]
+retrofit-version = '2.9.0'
+core-ktx-version = '1.8.0'
+kotlin-bom-version = '1.8.0'
+lifecyle-runtime-ktx-version = '2.3.1'
+activity-compose-version = '1.5.1'
+compose-bom-version = '2022.10.00'
+junit-version = "4.13.2"
+junit-ext-version = "1.1.5"
+espresso-core-version = '3.5.1'
+moshi-kotlin-version = "1.14.0"
+moshi-kotlin-codegen-version = "1.14.0"
+dagger-hilt-android-version = "2.44"
+dagger-hilt-compiler-version = "2.44"
+hilt-navigation-compose-version = "1.0.0"
+material-icons-extended-version = "1.4.3"
+navigation-runtime-ktx-version = "2.5.2"
+navigation-compose-version = "2.6.0"
+moshi-converter-version = "2.4.0"
+room-version = "2.5.2"
+datastore-preferences-version = "1.1.0-alpha04"
+window-manager-version = "1.0.0"
+material3-window-size-version = "1.1.1"
+mockk-version = "1.13.5"
+kotin-coroutines-test-version = "1.6"
+
+
+
+
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit-version" }
+junit-ext = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ext-version" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core-version" }
+
+
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-version" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx-version" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin-bom-version" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecyle-runtime-ktx-version" }
+moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi-kotlin-version" }
+moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi-kotlin-codegen-version" }
+
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose-version" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom-version" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-material = { group = "androidx.compose.material3", name = "material3" }
+compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compse-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+
+dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger-hilt-android-version" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "dagger-hilt-compiler-version" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose-version" }
+navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigation-runtime-ktx-version" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose-version" }
+
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "material-icons-extended-version" }
+
+moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshi-converter-version" }
+
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room-version" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room-version" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room-version" }
+
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences-version" }
+window-manager = { group = "androidx.window", name = "window", version.ref = "window-manager-version" }
+material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3-window-size-version" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk-version" }
+kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotin-coroutines-test-version" }
