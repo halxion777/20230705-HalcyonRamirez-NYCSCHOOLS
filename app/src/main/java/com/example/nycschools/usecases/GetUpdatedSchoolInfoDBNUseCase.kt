@@ -5,7 +5,10 @@ import com.example.nycschools.repository.db.models.SchoolInformationEntity
 import com.example.nycschools.repository.db.models.toDTO
 import com.example.nycschools.repository.network.data.SchoolInformationDTO
 import javax.inject.Inject
+import javax.inject.Singleton
 
+
+@Singleton
 class GetUpdatedSchoolInfoDBNUseCase @Inject constructor(private val repo: NycSchoolsRepo) {
     suspend operator fun invoke(dbn: String): SchoolInformationDTO {
         val schoolInfo = repo.getSchoolInfo(dbn)

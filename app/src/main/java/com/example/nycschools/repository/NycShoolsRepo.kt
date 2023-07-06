@@ -9,6 +9,8 @@ interface NycSchoolsRepo {
     suspend fun getSatScoreForSchool(dbn: String): List<SchoolSatDTO>
     suspend fun getSchoolInfo(dbn: String): SchoolInformationEntity?
     suspend fun saveTimeStamp(timestamp: String)
-    suspend fun getTimeStamp():String
+    suspend fun getTimeStamp(): String
     suspend fun updateSchoolSatScore(dbn: String, satDTO: SchoolSatDTO)
+    suspend fun saveDBN(dbn: String)
+    suspend fun getDBN(): String
 }

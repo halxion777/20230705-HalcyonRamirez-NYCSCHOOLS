@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -24,14 +23,19 @@ import com.example.nycschools.vm.SharedVM
 fun NycSchoolMedium(vm: SharedVM) {
     val state = vm.state.value
     if (state.schoolMap.size > 1) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp)
+        ) {
             SchoolList(schoolMap = state.schoolMap.toList(), onClick = {
-                vm.uiEvent(NycSchooInfoScreenUIEvents.SchoolClickDbn(it))
+                vm.uiEvent(NycSchooInfoScreenUIEvents.GetSchoolInfoForDBN(it))
             }, modifier = Modifier.weight(0.3f))
 
-            SchoolInformation(currentSchool = state.currentSchool!!, modifier = Modifier.weight(0.7f))
+            SchoolInformation(
+                currentSchool = state.currentSchool!!,
+                modifier = Modifier.weight(0.7f)
+            )
         }
     } else {
         Column(
@@ -43,7 +47,9 @@ fun NycSchoolMedium(vm: SharedVM) {
         }
     }
 
-    LaunchedEffect(key1 = true) {
-        vm.uiEvent(NycSchooInfoScreenUIEvents.LoadInitialData)
+    if (state.schoolMap.isEmpty()) {
+        LaunchedEffect(vm) {
+            vm.uiEvent(NycSchooInfoScreenUIEvents.LoadInitialData)
+        }
     }
 }
