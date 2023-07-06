@@ -14,24 +14,23 @@ import androidx.navigation.NavController
 import com.example.nycschools.R
 import com.example.nycschools.ui.components.SchoolList.SchoolList
 import com.example.nycschools.ui.events.NycSchooInfoScreenUIEvents
-import com.example.nycschools.vm.SchoolListVM
+import com.example.nycschools.vm.SharedVM
 
 
 @Composable
 fun SchoolListScreenCompact(
     navController: NavController,
-    vm: SchoolListVM,
+    vm: SharedVM,
     modifier: Modifier = Modifier
 ) {
     val state = vm.state.value
     val schools = state.schoolMap.toList()
     if (schools.size > 1) {
         SchoolList(schoolMap = schools, onClick = {
+            vm.uiEvent(NycSchooInfoScreenUIEvents.GetSchoolInfoForDBN(it))
             vm.uiEvent(NycSchooInfoScreenUIEvents.SchoolClickNavigate {
-                navController.navigate("schoolInfo/$it")
+                navController.navigate("schoolInfo")
             })
-
-
         }, modifier = modifier)
     } else {
         Column(
@@ -44,9 +43,12 @@ fun SchoolListScreenCompact(
         }
     }
 
-    LaunchedEffect(key1 = true) {
-        vm.uiEvent(NycSchooInfoScreenUIEvents.LoadInitialData)
+    if (state.schoolMap.isEmpty()) {
+        LaunchedEffect(vm) {
+            vm.uiEvent(NycSchooInfoScreenUIEvents.LoadInitialData)
+        }
     }
+
 }
 
 

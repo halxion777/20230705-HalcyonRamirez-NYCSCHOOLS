@@ -10,8 +10,10 @@ import com.example.nycschools.repository.network.data.SchoolInformationDTO
 import com.example.nycschools.repository.network.data.SchoolSatDTO
 import com.example.nycschools.repository.network.data.toEntities
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
+@Singleton
 class NycSchoolsRepoImpl @Inject constructor(
     private val nycSchoolService: NycSchoolsService,
     private val nycSchoolDatabase: NycSchoolDatabase,
@@ -36,6 +38,14 @@ class NycSchoolsRepoImpl @Inject constructor(
             readingScore = satDTO.satCriticalReadingAvgScore ?: "",
             writingScore = satDTO.satWritingAvgScore ?: ""
         )
+    }
+
+    override suspend fun saveDBN(dbn: String) {
+        nycSchoolsDataStore.saveDbn(dbn)
+    }
+
+    override suspend fun getDBN(): String {
+        return nycSchoolsDataStore.getDbn()
     }
 
     override suspend fun getSatScoreForSchool(dbn: String): List<SchoolSatDTO> {

@@ -2,7 +2,6 @@ package com.example.nycschools.vm
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.nycschools.ui.events.NycSchooInfoScreenUIEvents
@@ -16,12 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class SharedVM @Inject constructor(
     private val getUpdatedSchoolInfoDBNUseCase: GetUpdatedSchoolInfoDBNUseCase,
-    private val getAllSchoolsUseCase: NYCGetAllSchoolsUseCase,
-    private val savedState: SavedStateHandle
+    private val getAllSchoolsUseCase: NYCGetAllSchoolsUseCase
 ) : ViewModel() {
 
     private val _state = mutableStateOf(NycPageListUiState())
     val state: State<NycPageListUiState> = _state
+
     fun uiEvent(event: NycSchooInfoScreenUIEvents) {
         when (event) {
             is NycSchooInfoScreenUIEvents.LoadInitialData -> {
@@ -33,13 +32,19 @@ class SharedVM @Inject constructor(
                 }
 
             }
-            is NycSchooInfoScreenUIEvents.SchoolClickDbn -> {
+
+            is NycSchooInfoScreenUIEvents.GetSchoolInfoForDBN -> {
                 viewModelScope.launch {
                     val updatedData = getUpdatedSchoolInfoDBNUseCase(event.dbn)
                     _state.value = _state.value.copy(currentSchool = updatedData)
                 }
             }
-            else -> {}
+
+
+            is NycSchooInfoScreenUIEvents.SchoolClickNavigate -> {
+                event.navigate()
+            }
+
         }
     }
 }

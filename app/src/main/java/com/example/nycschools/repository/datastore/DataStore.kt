@@ -13,8 +13,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-
-
 @Singleton
 class NycSchoolsDataStore @Inject constructor(private val store: DataStore<Preferences>) {
     suspend fun saveTimeStamp(data: String) {
@@ -26,6 +24,15 @@ class NycSchoolsDataStore @Inject constructor(private val store: DataStore<Prefe
     suspend fun getTimeStamp(): String {
         val timestamp = store.data.map { pref -> pref[TIMESTAMP] ?: "" }.first()
         return timestamp
+    }
+
+    suspend fun saveDbn(dbn: String) {
+        store.edit { settings ->
+            settings[DBN] = dbn
+        }
+    }
+    suspend fun getDbn(): String {
+        return store.data.map { pref -> pref[DBN] ?: "" }.first()
     }
 
     suspend fun isCacheExpired(): Boolean {
@@ -44,6 +51,7 @@ class NycSchoolsDataStore @Inject constructor(private val store: DataStore<Prefe
     companion object {
         val Context.store by preferencesDataStore("prefs")
         val TIMESTAMP = stringPreferencesKey("timestamp")
+        val DBN = stringPreferencesKey("dbn")
     }
 
 }
