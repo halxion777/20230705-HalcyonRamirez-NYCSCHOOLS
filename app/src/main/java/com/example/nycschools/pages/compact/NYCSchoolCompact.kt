@@ -26,15 +26,11 @@ fun NYCSchoolCompact(viewModel: SharedVM) {
         }
         composable(
             "schoolInfo",
-//            arguments = listOf(navArgument("dbn") { type = NavType.StringType })
         ) {
             SchoolInformationScreenCompact(
-//                schoolId = it.arguments?.getString("dbn")!!,
                 navController = navController,
                 vm = viewModel,
             )
         }
     }
-
-
 }
