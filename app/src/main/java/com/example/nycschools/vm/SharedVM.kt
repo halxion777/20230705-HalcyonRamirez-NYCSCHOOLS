@@ -9,6 +9,10 @@ import com.example.nycschools.ui.state.NycPageListUiState
 import com.example.nycschools.usecases.GetUpdatedSchoolInfoDBNUseCase
 import com.example.nycschools.usecases.NYCGetAllSchoolsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,8 +22,8 @@ class SharedVM @Inject constructor(
     private val getAllSchoolsUseCase: NYCGetAllSchoolsUseCase
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(NycPageListUiState())
-    val state: State<NycPageListUiState> = _state
+    private val _state = MutableStateFlow(NycPageListUiState())
+    val state = _state.asStateFlow()
 
     fun uiEvent(event: NycSchooInfoScreenUIEvents) {
         when (event) {
@@ -27,8 +31,9 @@ class SharedVM @Inject constructor(
                 viewModelScope.launch {
                     val allSchools = getAllSchoolsUseCase()
                     val schoolMap = allSchools.associate { it.dbn!! to it.schoolName!! }
-                    _state.value =
-                        _state.value.copy(schoolMap = schoolMap, currentSchool = allSchools[0])
+                    _state.update {
+                        it.copy(schoolMap = schoolMap, currentSchool = allSchools[0])
+                    }
                 }
 
             }
@@ -36,13 +41,21 @@ class SharedVM @Inject constructor(
             is NycSchooInfoScreenUIEvents.GetSchoolInfoForDBN -> {
                 viewModelScope.launch {
                     val updatedData = getUpdatedSchoolInfoDBNUseCase(event.dbn)
-                    _state.value = _state.value.copy(currentSchool = updatedData)
+                    _state.update {
+                        it.copy(currentSchool = updatedData)
+                    }
                 }
             }
 
 
             is NycSchooInfoScreenUIEvents.SchoolClickNavigate -> {
                 event.navigate()
+            }
+
+            is NycSchooInfoScreenUIEvents.BackPressed -> {
+                _state.update {
+                    it.copy(currentSchool = null)
+                }
             }
 
         }
